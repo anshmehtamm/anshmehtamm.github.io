@@ -21,7 +21,7 @@ repository               : "anshmehtamm/anshmehtamm.github.io"
 #               Additional customization can be done by editing /_includes/author-profile.html
 author:
   # Biographic information
-  avatar           : "images/profilepoc.jpeg"
+  avatar           : "profilepoc.jpeg"
   name             : "Ansh Mehta"
   pronouns         : # example: "she/her"  
   bio              : "Graduate Student at Northeastern University, exploring the world of Machine Learning and Deep Learning."

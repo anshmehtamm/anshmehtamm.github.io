@@ -7,10 +7,13 @@ redirect_from:
   - /about.html
 ---
 
-Hi, there I am Ansh Mehta. Currently a graduate student in Computer Science at Northeastern University, Boston. 
+I am currently a graduate student pursuing a Master of Science in Computer Science at Northeastern University.
 
-I am interested in Machine Learning, Data Science, and Software Engineering. Recently I have been working on projects related to Machine Learning and looking forward to learn more and in-depth to this exciting field.
+My interest in computer science began in high school when I started teaching myself app development and coding for Android in 2015. This was during a period when I was also preparing for competitive exams in India.
 
-Previously I have worked on various projects in these domains and have experience in building scalable and robust software systems in particular to analytics and data engineering.
+For my undergraduate studies, I attended the LNM Institute of Information Technology in Jaipur, where I majored in Computer Science. My time there provided me with a solid foundation in computer science, and also participated in a lot of competitive coding challenges and hackathons. Additionally, I had the opportunity to co-author a research paper with Dr. Saurabh Kumar, focusing on deployment techniques for IoT nodes.
 
+I joined Whatfix in 2021, where I worked for 2.5 years as a Software Engineer. During my tenure, I played a key role in developing a no-code analytics platform from scratch. In this role, I was fully engaged in various aspects of the project, from managing data pipelines to crafting complex SQL queries for data visualization and tackling the intricacies of JavaScript to ensure accurate event capturing.
+
+In 2023, inspired by recent advancements in Artificial Intelligence and feeling a desire to deeply understand and contribute to the field, I decided to leave my job and pursue a master's degree in Computer Science. This decision was driven by my interest in AI, a sense of missing out on significant developments, and a desire to challenge myself further. I enrolled at Northeastern University in Boston, where I am expanding my knowledge and skills in this area.
 

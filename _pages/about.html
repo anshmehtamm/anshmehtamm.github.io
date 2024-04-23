@@ -50,6 +50,7 @@ document.getElementById('news-input').addEventListener('input', function() {
         fetch('https://bkrv0f4amc.execute-api.us-east-1.amazonaws.com/news_classify', {
             method: 'POST',
             mode: 'cors',
+            origin: 'https://anshmehtamm.github.io',
             headers: {
                 'Content-Type': 'application/json'
             },

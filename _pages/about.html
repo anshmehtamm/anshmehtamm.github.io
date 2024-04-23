@@ -47,7 +47,7 @@ document.getElementById('news-input').addEventListener('input', function() {
     var text = this.value;
     var words = text.split(' ').filter(function(word) { return word.trim() !== ''; });
     if (words.length > 3) {
-        fetch('http://100.25.23.65/news_classify', {
+        fetch('https://bkrv0f4amc.execute-api.us-east-1.amazonaws.com/news_classify', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

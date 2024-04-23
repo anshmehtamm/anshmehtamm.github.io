@@ -17,7 +17,19 @@ redirect_from:
     body { font-family: Arial, sans-serif; }
     #project-showcase { margin-top: 20px; }
     #news-result { margin-top: 20px; color: blue; }
+    .word-container {
+        display: inline-block;
+        margin: 5px;
+        padding: 5px;
+        color: white; /* Ensures text is visible on colored backgrounds */
+        border-radius: 4px;
+    }
+    .gradient-value {
+        font-size: 0.8em;
+        color: #EEE; /* Light color for visibility */
+    }
 </style>
+
 </head>
 <body>
 <div>
@@ -32,40 +44,55 @@ redirect_from:
         
         In 2023, inspired by recent advancements in Artificial Intelligence and feeling a desire to deeply understand and contribute to the field, I decided to leave my job and pursue a master's degree in Computer Science. This decision was driven by my interest in AI, a sense of missing out on significant developments, and a desire to challenge myself further. I enrolled at Northeastern University in Boston, where I am expanding my knowledge and skills in this area.
         </div>
-<div id="project-showcase">
-    <h2>Latest Project</h2>
-    <p>Project Description: This is my latest project which focuses on leveraging AI for web applications. Check it out below!</p>
-    <!-- Placeholder for project demo, such as an iframe or image -->
-</div>
 <div>
     <h2>News Classifier</h2>
     <input type="text" id="news-input" placeholder="Enter a news headline" autocomplete="off">
     <div id="news-result"></div>
 </div>
 <script>
-document.getElementById('news-input').addEventListener('input', function() {
-    var text = this.value;
-    var words = text.split(' ').filter(function(word) { return word.trim() !== ''; });
-    if (words.length > 3) {
-        fetch('https://bkrv0f4amc.execute-api.us-east-1.amazonaws.com/news_classify', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ title: text })
-        })
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById('news-result').textContent = 'Classification: ' + data.category;
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            document.getElementById('news-result').textContent = 'Failed to classify news.';
+    document.getElementById('news-input').addEventListener('input', function() {
+        var text = this.value;
+        var words = text.split(' ').filter(function(word) { return word.trim() !== ''; });
+        if (words.length > 3) {
+            fetch('https://bkrv0f4amc.execute-api.us-east-1.amazonaws.com/news_classify', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ title: text })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('news-result').textContent = 'Classification: ' + data.category;
+                displayTitleWithColors(data.title, data.colors, data.gradients);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('news-result').textContent = 'Failed to classify news.';
+            });
+        } else {
+            document.getElementById('news-result').textContent = '';
+        }
+    });
+    
+    function displayTitleWithColors(titles, colors, gradients) {
+        const container = document.createElement('div');
+        titles.forEach((title, index) => {
+            const wordContainer = document.createElement('div');
+            wordContainer.className = 'word-container';
+            wordContainer.style.backgroundColor = colors[index];
+            wordContainer.textContent = title;
+    
+            const gradientSpan = document.createElement('span');
+            gradientSpan.className = 'gradient-value';
+            gradientSpan.textContent = ' Gradient: ' + gradients[index].toFixed(2);
+            wordContainer.appendChild(gradientSpan);
+    
+            container.appendChild(wordContainer);
         });
-    } else {
-        document.getElementById('news-result').textContent = '';
+        document.getElementById('news-result').appendChild(container);
     }
-});
-</script>
+    </script>
 </body>
 </html>
+

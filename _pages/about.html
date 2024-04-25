@@ -91,8 +91,10 @@ redirect_from:
     
             container.appendChild(wordContainer);
         });
-        const aboutResult = document.createElement('p');
-        aboutResult.textContent = 'lighter the color, higher the importance of the word in the classification.';
+        const aboutResult = document.createElement('div');
+        const textContent = document.createElement('p');
+        textContent.textContent = 'lighter the color, higher the importance of the word in the classification.';
+        aboutResult.appendChild(textContent);
         container.appendChild(textContent);
         document.getElementById('news-result').appendChild(container);
     }

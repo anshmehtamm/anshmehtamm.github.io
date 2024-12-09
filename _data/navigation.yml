@@ -6,7 +6,7 @@ main:
   - title: "Portfolio"
     url: /portfolio/
         
-  - title: "Blog Posts (yet to add more)"
+  - title: "Blog Posts"
     url: /year-archive/
     
   - title: "CV"

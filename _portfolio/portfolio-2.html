@@ -1,68 +1,16 @@
 ---
-title: "LSTM Classifier"
-excerpt: "Classification using Recurrent Neural Networks (from scratch)"
+title: "NewsSwipe (A Hackathon Project)"
+excerpt: "Summarizing news using GPT in a "reel" based interface.<br/>"
 collection: portfolio
 ---
 
-This project is a simple LSTM classifier that classifies news into 4 categories: world, business, sci/tech, and sports. The model was trained on the <a href="https://www.kaggle.com/amananandrai/ag-news-classification-dataset"> AG News dataset</a> using a simple LSTM network,
-and using PyTorch.<br><br>Training code is available on <a href="github.com/anshmehtamm/news_category_classifier">Github</a>
-<br><br>
-<b>Checkout a little demo below deployed using AWS Lambda and API Gateway.</b>
-<br><br>
-<div>
-<p>Classify news into 4 categories: world, business, sci/tech, and sports</p>
-<input type="text" id="news-input" placeholder="Enter a news headline" autocomplete="off">
-<div id="news-result"></div>
-<p>Checkout the project in detail on <a href="https://github.com/anshmehtamm/news_category_classifier">Github</a></p>
-</div>
-<script>
-document.getElementById('news-input').addEventListener('input', function() {
-    var text = this.value;
-    var words = text.split(' ').filter(function(word) { return word.trim() !== ''; });
-    if (words.length > 3) {
-        fetch('https://bkrv0f4amc.execute-api.us-east-1.amazonaws.com/news_classify', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ title: text })
-        })
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById('news-result').textContent = 'Classification: ' + data.category;
-            displayTitleWithColors(data.title, data.colors, data.gradients);
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            document.getElementById('news-result').textContent = 'Failed to classify news.';
-        });
-    } else {
-        document.getElementById('news-result').textContent = '';
-    }
-});
+This project was developed during the DeveloperWeek 2024 Hackathon.  <br>
+The project is iOS application that summarizes news articles using GPT-3.5. 
+The application uses the OpenAI API to generate summaries of news articles, and uses google news API to fetch the latest articles.
+ <br><br>Currently I have stopped the backend server, so the application is not functional.  <br>
+ I plan to re-deploy the server in the future, and publish the application on the App Store.
+ <br><br>
+ Checkout the project in detail on <a href="https://github.com/anshmehtamm/newsswipe-backend">Github</a>
 
-function displayTitleWithColors(titles, colors, gradients) {
-    const container = document.createElement('div');
-    titles.forEach((title, index) => {
-        const wordContainer = document.createElement('div');
-        wordContainer.className = 'word-container';
-        wordContainer.style.backgroundColor = colors[index];
-        wordContainer.textContent = title;
-
-        const gradientSpan = document.createElement('span');
-        gradientSpan.className = 'gradient-value';
-        gradientSpan.textContent = ' Gradient: ' + gradients[index].toFixed(2);
-        wordContainer.appendChild(gradientSpan);
-
-        container.appendChild(wordContainer);
-    });
-    const aboutResult = document.createElement('div');
-    const textContent = document.createElement('p');
-    textContent.textContent = 'lighter the color, higher the importance of the word in the classification.';
-    aboutResult.appendChild(textContent);
-    container.appendChild(textContent);
-    document.getElementById('news-result').appendChild(container);
-}
-</script>
 
 

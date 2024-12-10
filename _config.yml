@@ -13,7 +13,7 @@ title_separator          : "-"
 name                     : &name "Ansh Mehta"
 description              : &description "personal description"
 url                      : https://anshmehtamm.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
-baseurl                  : "/personal-website" # the subpath of your site, e.g. "/blog"
+baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : "anshmehtamm/anshmehtamm.github.io"
 
 # Site Author - The following control what appear as part of the author content on the side bar.
@@ -24,17 +24,17 @@ author:
   avatar           : "profilepoc.jpeg"
   name             : "Ansh Mehta"
   pronouns         : # example: "she/her"  
-  bio              : "Graduate Student at Northeastern University, exploring the world of Machine Learning and Deep Learning."
+  bio              : "Software Engineer, MS in Computer Science"
   location         : "Boston, MA"
   employer         : "Northeastern Univeristy"
   uri              : # URL
-  email            : "mehta.ansh1@northeastern.edu" 
+  email            : "anshmehtamm@gmail.com" 
 
   # Academic websites
   arxiv            : # URL - Update with the correct link to your profile
   googlescholar    : "https://scholar.google.com/citations?user=MHwIJ1YAAAAJ&hl=en"
   impactstory      : # URL
-  orcid            : "http://orcid.org/yourorcidurl"
+  orcid            : # URL
 
   # Repositories and software development
   github           : "anshmehtamm"    
@@ -67,7 +67,7 @@ author:
 
 # Site Settings
 teaser                   :  # filename of teaser fallback teaser image placed in /images/, .e.g. "500x300.png"
-breadcrumbs              : false # true, false (default)
+breadcrumbs              : true # true, false (default)
 words_per_minute         : 160
 future                   : true
 read_more                : "disabled" # if enabled, adds "Read more" links to excerpts

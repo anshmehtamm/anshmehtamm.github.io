@@ -75,7 +75,7 @@ redirect_from:
     #news-result {
         margin-top: 15px;
         font-weight: bold;
-        color: #28a745; /* Different color for classification result */
+        /* Removed color: #28a745; - let the JS handle coloring/styling if needed */
     }
     .word-container {
         display: inline-block;
@@ -98,42 +98,104 @@ redirect_from:
         margin-top: 10px;
     }
 
-    /* Product Search Specific Styles */
-    #product-search-results {
-        margin-top: 20px;
-        max-height: 400px; /* Limit height and make scrollable if needed */
-        overflow-y: auto; /* Add scrollbar if content overflows */
+    /* --- MODAL STYLES --- */
+    #modal-backdrop {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 999; /* Sit behind the modal but on top of everything else */
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto; /* Enable scroll if needed (though content scrolls) */
+        background-color: rgba(0,0,0,0.5); /* Black w/ opacity */
     }
-    #product-search-results table {
+
+    #search-modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1000; /* Sit on top */
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        justify-content: center; /* Center horizontally */
+        align-items: center; /* Center vertically */
+    }
+
+    .modal-content {
+        background-color: #fefefe;
+        margin: auto; /* Auto margins combined with flex centering */
+        padding: 30px;
+        border: 1px solid #888;
+        border-radius: 8px;
+        width: 80%; /* Could be more dynamic */
+        max-width: 800px; /* Max width */
+        max-height: 85vh; /* Max height relative to viewport */
+        overflow-y: hidden; /* Hide direct scroll, inner div will scroll */
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+        position: relative; /* For positioning the close button */
+        display: flex; /* Use flexbox for layout inside */
+        flex-direction: column; /* Stack elements vertically */
+    }
+
+    .modal-close-button {
+        color: #aaa;
+        position: absolute;
+        top: 10px;
+        right: 20px;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .modal-close-button:hover,
+    .modal-close-button:focus {
+        color: black;
+        text-decoration: none;
+    }
+
+    /* Product Search Results Styles (Inside Modal) */
+    #modal-product-search-results { /* New ID for modal results container */
+        margin-top: 20px;
+        overflow-y: auto; /* Make this part scrollable */
+        flex-grow: 1; /* Allow this container to grow and fill space */
+        border: 1px solid #eee; /* Optional border */
+        padding: 5px; /* Optional padding */
+    }
+    #modal-product-search-results table {
         width: 100%;
         border-collapse: collapse;
         margin-top: 10px;
     }
-    #product-search-results th,
-    #product-search-results td {
+    #modal-product-search-results th,
+    #modal-product-search-results td {
         border: 1px solid #ddd;
         padding: 10px;
         text-align: left;
         font-size: 0.9em;
     }
-    #product-search-results th {
+    #modal-product-search-results th {
         background-color: #f2f2f2;
         font-weight: bold;
-        position: sticky; /* Make header sticky */
-        top: 0; /* Stick to the top of the scrollable container */
+        position: sticky; /* Make header sticky within the scrollable area */
+        top: 0; /* Stick to the top */
         z-index: 1;
     }
-    #product-search-results td:nth-child(2) { /* Description column */
-       max-width: 300px; /* Limit width of description */
+    #modal-product-search-results td:nth-child(3) { /* Description column (adjust index if needed) */
+       max-width: 350px; /* Limit width of description */
        word-wrap: break-word; /* Wrap long descriptions */
     }
     .loading-message, .error-message {
         color: #555;
         font-style: italic;
+        padding: 15px;
+        text-align: center;
     }
     .error-message {
         color: #dc3545; /* Red for errors */
     }
+    /* --- END MODAL STYLES --- */
 
 </style>
 </head>
@@ -150,19 +212,17 @@ redirect_from:
 
 <div id="demos-container">
 
-    <!-- Demo Box 1: Semantic Product Search -->
+    <!-- Demo Box 1: Semantic Product Search (Triggers Modal) -->
     <div class="demo-box">
         <h3>Semantic Product Search</h3>
-        <p>Enter a product query to find semantically similar items based on their descriptions. (e.g., "summer dress", "running shoes for men", "wireless headphones")</p>
+        <p>Enter a product query to find semantically similar items based on their descriptions. (e.g., "summer dress", "running shoes for men").</p>
+        <p>It uses MiniLM-L6-v2 (Sentence Transformers) to generate vector embeddings and perform an approximate nearest neighbour search on the vector index.</p>
         <div>
             <input type="text" id="product-search-input" placeholder="Enter product search query" autocomplete="off">
-            <button id="product-search-button">Search</button>
+            <button id="product-search-button">Search</button> <!-- Button now triggers modal -->
         </div>
-        <div id="product-search-results">
-            <!-- Search results will be displayed here as a table -->
-        </div>
-        <p><small>Note: This demo uses vector embeddings to find relevant products.</small></p>
-         <!-- Add Github link if you have one for this project -->
+        <!-- Results are now shown in the modal -->
+        <p><small>Note: This demo is running on a CPU. Might be a little slow.</small></p>
          <!-- <p>Checkout the project in detail on <a href="YOUR_PRODUCT_SEARCH_GITHUB_LINK">Github</a></p> -->
     </div>
 
@@ -179,6 +239,21 @@ redirect_from:
     </div>
 
 </div>
+
+<!-- The Modal Structure (Initially Hidden) -->
+<div id="modal-backdrop"></div>
+<div id="search-modal">
+  <div class="modal-content">
+    <span class="modal-close-button">×</span>
+    <h2>Semantic Search Results</h2>
+    <p>Showing results for query: <strong id="modal-query-display"></strong></p>
+    <div id="modal-product-search-results">
+        <!-- Search results table will be injected here by JS -->
+    </div>
+  </div>
+</div>
+
+
 <script src="/assets/js/demo.js" defer></script>
 </body>
 </html>

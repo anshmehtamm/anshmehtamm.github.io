@@ -1,102 +1,416 @@
----
-permalink: /
-title: ""
-author_profile: true
-redirect_from: 
-  - /about/
-  - /about.html
----
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>About Me</title>
-<style>
-    body { font-family: Arial, sans-serif; }
-    #project-showcase { margin-top: 20px; }
-    #news-result { margin-top: 20px; color: blue; }
-    .word-container {
-        display: inline-block;
-        margin: 5px;
-        padding: 5px;
-        color: white; /* Ensures text is visible on colored backgrounds */
-        border-radius: 4px;
-    }
-    .gradient-value {
-        font-size: 0.8em;
-        color: #EEE; /* Light color for visibility */
-    }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ansh Mehta - Portfolio</title> <!-- Changed title -->
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        .container { /* Added a main container for content centering */
+            max-width: 960px;
+            margin: 20px auto;
+            padding: 0 15px;
+        }
+        /* Basic link styling */
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        /* Header styling (assuming you might have one later) */
+        /* You'll need to integrate this with your Jekyll header/nav if applicable */
+        .portfolio-header {
+             padding: 10px 0;
+             border-bottom: 1px solid #eee;
+             margin-bottom: 20px;
+             /* Add styles for Ansh Mehta, Projects, Publications etc. here */
+        }
 
+        h1, h2, h3, h4 {
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+            color: #212529;
+        }
+        h1 { font-size: 2.2em; }
+        h2 { font-size: 1.8em; border-bottom: 1px solid #dee2e6; padding-bottom: 0.3em; }
+        h3 { font-size: 1.4em; }
+        h4 { font-size: 1.1em; color: #495057; }
+
+        /* Demo Container */
+        .demos-container {
+            display: flex;
+            flex-wrap: wrap; /* Allows boxes to stack on smaller screens */
+            gap: 25px; /* Space between boxes */
+            margin-top: 20px;
+        }
+
+        /* Individual Demo Box Styling */
+        .demo-box {
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            flex: 1 1 400px; /* Flex properties: grow, shrink, basis */
+            min-width: 300px; /* Prevent boxes from becoming too narrow */
+            box-sizing: border-box;
+        }
+
+        /* Input Field Styling */
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            box-sizing: border-box; /* Include padding and border in width */
+            font-size: 1rem;
+        }
+        input[type="text"]:focus {
+            border-color: #80bdff;
+            outline: 0;
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        }
+
+        /* Results Area Styling */
+        .results-area {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border: 1px dashed #ced4da;
+            border-radius: 4px;
+            min-height: 50px; /* Give it some initial height */
+            font-size: 0.95em;
+        }
+        .results-area p {
+            margin-top: 0;
+            color: #6c757d;
+        }
+        .results-area .loading,
+        .results-area .error {
+            font-style: italic;
+            color: #6c757d;
+        }
+        .results-area .error {
+            color: #dc3545;
+        }
+
+        /* Search Results Table */
+        .search-results-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        .search-results-table th,
+        .search-results-table td {
+            border: 1px solid #dee2e6;
+            padding: 8px 12px;
+            text-align: left;
+            font-size: 0.9em;
+        }
+        .search-results-table th {
+            background-color: #e9ecef;
+            font-weight: 600;
+        }
+        .search-results-table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        /* LSTM Word Importance Styling */
+        .word-container {
+            display: inline-block;
+            margin: 3px;
+            padding: 4px 8px;
+            color: white; /* Ensures text is visible on colored backgrounds */
+            border-radius: 4px;
+            font-size: 0.9em;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+        .gradient-value {
+            font-size: 0.8em;
+            color: #f0f0f0; /* Light color for visibility */
+            margin-left: 5px;
+            opacity: 0.8;
+        }
+        .lstm-explanation { /* Style for the explanation text */
+             font-size: 0.85em;
+             color: #6c757d;
+             margin-top: 10px;
+        }
+
+    </style>
 </head>
 <body>
-<div>
+
+<!-- Assuming this is rendered by Jekyll -->
+<!-- You might need to adjust this part based on your Jekyll setup -->
+<!-- Example: Include author profile -->
+<!-- {% include author_profile.html %} -->
+
+<div class="container">
+
     <h1>About Me</h1>
-    <p> Hello, I'm Ansh Mehta. I'm currently pursuing my master's in Computer Science at Northeastern University in Boston.<br><br>
-        
-        Previously, I worked as a Software Engineer in the product analytics team at <a href="https://whatfix.com" target="_blank">Whatfix</a>. <br><br>
-        
-        My goal in pursuing this degree is to deepen my understanding of large-scale distributed systems and computing. I'm actively enhancing my knowledge through coursework and self-study, while also implementing research papers as mini projects to develop a more profound understanding of the subject.<br><br>
-    </div>
-<div>
-    <h3>Project Demo's</h2>
-    <h4>A LSTM classfier for text (Self Study in Spring 2024)</h3>
-    <p>Classify news into 4 categories: world, business, sci/tech, and sports</p>
-    <input type="text" id="news-input" placeholder="Enter a news headline" autocomplete="off">
-    <div id="news-result"></div>
-    <p>Checkout the project in detail on <a href="https://github.com/anshmehtamm/news_category_classifier">Github</a></p>
-</div>
+    <p> Hello, I'm Ansh Mehta. I'm currently pursuing my master's in Computer Science at Northeastern University in Boston.</p>
+    <p> Previously, I worked as a Software Engineer in the product analytics team at <a href="https://whatfix.com" target="_blank" rel="noopener noreferrer">Whatfix</a>.</p>
+    <p> My goal in pursuing this degree is to deepen my understanding of large-scale distributed systems and computing. I'm actively enhancing my knowledge through coursework and self-study, while also implementing research papers as mini projects to develop a more profound understanding of the subject.</p>
+
+    <h2>Project Demos</h2>
+
+    <div class="demos-container">
+
+        <!-- Demo Box 1: Semantic Product Search -->
+        <div class="demo-box">
+            <h3>Semantic Product Search</h3>
+            <p>Enter a query to search for products based on semantic meaning. Uses vector embeddings for search.</p>
+            <input type="text" id="search-query-input" placeholder="e.g., comfortable running shoes" autocomplete="off">
+            <div id="search-results-container" class="results-area">
+                <p>Enter a search query above to see top 5 results.</p>
+            </div>
+            <p style="margin-top: 15px; font-size: 0.9em;">
+                <!-- !! REPLACE with your actual GitHub link !! -->
+                Checkout the project in detail on <a href="https://github.com/yourusername/semantic-search-project" target="_blank" rel="noopener noreferrer">Github</a> (Link placeholder).
+            </p>
+        </div>
+
+        <!-- Demo Box 2: LSTM Classifier -->
+        <div class="demo-box">
+            <h3>LSTM Classifier for Text</h3>
+            <h4>(Self Study in Spring 2024)</h4>
+            <p>Classify news headlines into 4 categories: World, Business, Sci/Tech, and Sports.</p>
+            <input type="text" id="news-input" placeholder="Enter a news headline (min 4 words)" autocomplete="off">
+            <div id="news-result" class="results-area">
+                 <p>Enter a news headline above to classify.</p>
+            </div>
+             <p style="margin-top: 15px; font-size: 0.9em;">
+                Checkout the project in detail on <a href="https://github.com/anshmehtamm/news_category_classifier" target="_blank" rel="noopener noreferrer">Github</a>.
+            </p>
+        </div>
+
+    </div> <!-- end demos-container -->
+
+</div> <!-- end container -->
+
 <script>
-    document.getElementById('news-input').addEventListener('input', function() {
-        var text = this.value;
-        var words = text.split(' ').filter(function(word) { return word.trim() !== ''; });
+    // --- Semantic Product Search Logic ---
+    const searchInput = document.getElementById('search-query-input');
+    const searchResultsContainer = document.getElementById('search-results-container');
+    // !! REPLACE with your actual API endpoint !!
+    const searchApiUrl = 'http://54.146.155.142/semantic-product-search'; // e.g., 'https://yourapi.com/search'
+
+    searchInput.addEventListener('input', function() {
+        const query = this.value.trim();
+
+        // Basic check: trigger only if query is long enough (e.g., > 3 chars)
+        // You might want to add debouncing/throttling here for better performance
+        if (query.length > 3) {
+            fetchSearchResults(query);
+        } else if (query.length === 0) {
+            searchResultsContainer.innerHTML = '<p>Enter a search query above to see top 5 results.</p>'; // Reset placeholder
+        } else {
+             // Optionally show a message like "Keep typing..."
+             // searchResultsContainer.innerHTML = '<p>Keep typing...</p>';
+        }
+    });
+
+    function fetchSearchResults(query) {
+        searchResultsContainer.innerHTML = '<p class="loading">Searching...</p>'; // Show loading indicator
+
+        fetch(searchApiUrl, {
+            method: 'POST', // Or 'GET', depending on your API
+            headers: {
+                'Content-Type': 'application/json'
+                // Add any other required headers like Authorization if needed
+            },
+            body: JSON.stringify({ title: query }) // Adjust payload based on your API spec
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Assuming API returns an object with a 'results' array
+            // E.g., { results: [ { title: '...', description: '...', brand: '...' }, ... ] }
+            // !! Adjust this based on YOUR ACTUAL API response structure !!
+            displaySearchResults(data.results);
+        })
+        .catch(error => {
+            console.error('Error fetching search results:', error);
+            searchResultsContainer.innerHTML = `<p class="error">Failed to fetch search results. ${error.message}</p>`;
+        });
+    }
+
+    function displaySearchResults(results) {
+        if (!results || results.length === 0) {
+            searchResultsContainer.innerHTML = '<p>No results found for your query.</p>';
+            return;
+        }
+
+        // Limit to top 5 results as requested
+        const topResults = results.slice(0, 5);
+
+        // Create table structure
+        let tableHTML = `
+            <table class="search-results-table">
+                <thead>
+                    <tr>
+                        <th>Product Title</th>
+                        <th>Description</th>
+                        <th>Brand</th>
+                    </tr>
+                </thead>
+                <tbody>
+        `;
+
+        topResults.forEach(product => {
+            // Use empty string if data is missing/nullish
+            const title = product.title || '';
+            const description = product.description || '';
+            const brand = product.product_brand || product.brand || ''; // Check common variations
+
+            tableHTML += `
+                <tr>
+                    <td>${escapeHtml(title)}</td>
+                    <td>${escapeHtml(description)}</td>
+                    <td>${escapeHtml(brand)}</td>
+                </tr>
+            `;
+        });
+
+        tableHTML += `
+                </tbody>
+            </table>
+        `;
+
+        searchResultsContainer.innerHTML = tableHTML;
+    }
+
+    // Helper function to prevent basic XSS issues when displaying dynamic content
+    function escapeHtml(unsafe) {
+        if (unsafe === null || typeof unsafe === 'undefined') return '';
+        return unsafe
+             .toString()
+             .replace(/&/g, "&")
+             .replace(/</g, "<")
+             .replace(/>/g, ">")
+             .replace(/"/g, """)
+             .replace(/'/g, "'");
+    }
+
+
+    // --- LSTM Classifier Logic ---
+    const newsInput = document.getElementById('news-input');
+    const newsResultDiv = document.getElementById('news-result');
+    const newsApiUrl = 'http://54.146.155.142/news_classify'; // Existing API endpoint
+
+    newsInput.addEventListener('input', function() {
+        const text = this.value.trim();
+        const words = text.split(' ').filter(word => word.trim() !== '');
+
         if (words.length > 3) {
-            fetch('https://bkrv0f4amc.execute-api.us-east-1.amazonaws.com/news_classify', {
+             newsResultDiv.innerHTML = '<p class="loading">Classifying...</p>'; // Loading indicator
+            fetch(newsApiUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ title: text })
+                body: JSON.stringify({ title: text }) // API expects 'title'
             })
-            .then(response => response.json())
+            .then(response => {
+                 if (!response.ok) {
+                    // Try to get error message from response body if available
+                    return response.json().then(errData => {
+                        throw new Error(errData.message || `HTTP error! status: ${response.status}`);
+                    }).catch(() => {
+                         // Fallback if response body is not JSON or empty
+                         throw new Error(`HTTP error! status: ${response.status}`);
+                    });
+                }
+                return response.json();
+            })
             .then(data => {
-                document.getElementById('news-result').textContent = 'Classification: ' + data.category;
-                displayTitleWithColors(data.title, data.colors, data.gradients);
+                // Clear previous content before adding new results
+                newsResultDiv.innerHTML = '';
+
+                // Display classification category
+                const categoryP = document.createElement('p');
+                categoryP.innerHTML = `<strong>Classification:</strong> ${escapeHtml(data.category || 'N/A')}`;
+                newsResultDiv.appendChild(categoryP);
+
+                // Display word importance visualization if data is available
+                if (data.title && data.colors && data.gradients) {
+                    displayTitleWithColors(data.title, data.colors, data.gradients);
+                } else {
+                    // Fallback if visualization data isn't returned
+                    const rawTitleP = document.createElement('p');
+                    rawTitleP.textContent = `Input: ${escapeHtml(text)}`;
+                    newsResultDiv.appendChild(rawTitleP);
+                }
             })
             .catch(error => {
-                console.error('Error:', error);
-                document.getElementById('news-result').textContent = 'Failed to classify news.';
+                console.error('Error classifying news:', error);
+                newsResultDiv.innerHTML = `<p class="error">Failed to classify news. ${error.message}</p>`;
             });
+        } else if (text.length === 0) {
+             newsResultDiv.innerHTML = '<p>Enter a news headline above to classify.</p>'; // Reset placeholder
         } else {
-            document.getElementById('news-result').textContent = '';
+            newsResultDiv.innerHTML = '<p>Please enter at least 4 words.</p>';
         }
     });
-    
+
     function displayTitleWithColors(titles, colors, gradients) {
-        const container = document.createElement('div');
+        const vizContainer = document.createElement('div');
+        vizContainer.style.marginTop = '10px'; // Add some space above the viz
+
         titles.forEach((title, index) => {
             const wordContainer = document.createElement('div');
             wordContainer.className = 'word-container';
-            wordContainer.style.backgroundColor = colors[index];
-            wordContainer.textContent = title;
-    
-            const gradientSpan = document.createElement('span');
-            gradientSpan.className = 'gradient-value';
-            gradientSpan.textContent = ' Gradient: ' + gradients[index].toFixed(2);
-            wordContainer.appendChild(gradientSpan);
-    
-            container.appendChild(wordContainer);
+            // Ensure color is a valid CSS color, fallback if needed
+            wordContainer.style.backgroundColor = isValidColor(colors[index]) ? colors[index] : '#cccccc';
+            wordContainer.textContent = escapeHtml(title);
+
+            // Add gradient value if available and is a number
+            if (typeof gradients[index] === 'number') {
+                const gradientSpan = document.createElement('span');
+                gradientSpan.className = 'gradient-value';
+                gradientSpan.textContent = `(${gradients[index].toFixed(2)})`; // Shortened display
+                wordContainer.appendChild(gradientSpan);
+            }
+
+            vizContainer.appendChild(wordContainer);
         });
-        const aboutResult = document.createElement('div');
-        const textContent = document.createElement('p');
-        textContent.textContent = 'lighter the color, higher the importance of the word in the classification.';
-        aboutResult.appendChild(textContent);
-        container.appendChild(textContent);
-        document.getElementById('news-result').appendChild(container);
+
+        // Add explanation text
+        const explanation = document.createElement('p');
+        explanation.className = 'lstm-explanation';
+        explanation.textContent = 'Word importance visualization: Lighter background color indicates higher importance for the classification. Values in parentheses show gradient magnitudes.';
+        vizContainer.appendChild(explanation);
+
+        // Append the visualization container to the results div
+        newsResultDiv.appendChild(vizContainer);
     }
-    </script>
+
+    // Simple helper to check if a string is likely a valid CSS color
+    function isValidColor(strColor) {
+        if (!strColor) return false;
+        const s = new Option().style;
+        s.color = strColor;
+        // Check if the browser could parse the color. Basic check.
+        return s.color !== '';
+    }
+
+</script>
+
 </body>
 </html>
-

@@ -20,7 +20,7 @@ document.getElementById('news-input').addEventListener('input', function() {
     var text = this.value;
     var words = text.split(' ').filter(function(word) { return word.trim() !== ''; });
     if (words.length > 3) {
-        fetch('https://bkrv0f4amc.execute-api.us-east-1.amazonaws.com/news_classify', {
+        fetch('http://54.146.155.142/news_classify', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

@@ -6,201 +6,223 @@ redirect_from:
   - /about/
   - /about.html
 ---
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Update the title to reflect the main page content -->
 <title>Ansh Mehta - Portfolio</title>
 <style>
-    body {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        line-height: 1.6;
-        margin: 0;
-        padding: 20px;
-        background-color: #f4f4f4;
-        color: #333;
-    }
-    h1, h2, h3, h4 {
-        color: #333;
-    }
-    a {
-        color: #007bff;
-        text-decoration: none;
-    }
-    a:hover {
-        text-decoration: underline;
-    }
-    input[type="text"] {
-        padding: 10px;
-        margin-right: 5px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        width: calc(100% - 120px); /* Adjust width based on button */
-        max-width: 400px;
-    }
-    button {
-        padding: 10px 15px;
-        background-color: #007bff;
-        color: white;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        transition: background-color 0.2s ease;
-    }
-    button:hover {
-        background-color: #0056b3;
-    }
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f4;
+    color: #333;
+}
+h1, h2, h3, h4 {
+    color: #333;
+}
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+input[type="text"] {
+    padding: 10px;
+    margin-right: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: calc(100% - 120px); /* Adjust width based on button */
+    max-width: 400px;
+}
+button {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+button:hover {
+    background-color: #0056b3;
+}
+/* Demo Container Styles */
+#demos-container {
+    display: flex;
+    flex-wrap: wrap; /* Allow boxes to wrap on smaller screens */
+    gap: 30px; /* Space between demo boxes */
+    margin-top: 30px;
+}
 
-    /* Demo Container Styles */
-    #demos-container {
-        display: flex;
-        flex-wrap: wrap; /* Allow boxes to wrap on smaller screens */
-        gap: 30px; /* Space between demo boxes */
-        margin-top: 30px;
-    }
+.demo-box {
+    flex: 1; /* Each box tries to take equal space */
+    min-width: 350px; /* Minimum width before wrapping */
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    border: 1px solid #e0e0e0;
+    display: flex; /* Use flexbox for internal layout */
+    flex-direction: column; /* Stack content vertically */
+}
 
-    .demo-box {
-        flex: 1; /* Each box tries to take equal space */
-        min-width: 350px; /* Minimum width before wrapping */
-        background-color: #fff;
-        padding: 25px;
-        border-radius: 8px;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        border: 1px solid #e0e0e0;
-    }
+.demo-box h3 {
+    margin-top: 0; /* Remove default top margin */
+}
 
-    /* LSTM Specific Styles */
-    #news-result {
-        margin-top: 15px;
-        font-weight: bold;
-        /* Removed color: #28a745; - let the JS handle coloring/styling if needed */
-    }
-    .word-container {
-        display: inline-block;
-        margin: 3px;
-        padding: 4px 6px;
-        color: white; /* Ensures text is visible on colored backgrounds */
-        border-radius: 4px;
-        font-size: 0.9em;
-        box-shadow: 0 1px 2px rgba(0,0,0,0.2);
-    }
-    .gradient-value {
-        font-size: 0.75em;
-        color: #EEE; /* Light color for visibility */
-        margin-left: 4px;
-        opacity: 0.8;
-    }
-    #news-explanation {
-        font-size: 0.85em;
-        color: #555;
-        margin-top: 10px;
-    }
+.demo-box > *:last-child {
+     margin-bottom: 0; /* Prevent extra space at the bottom */
+}
 
-    /* --- MODAL STYLES --- */
-    #modal-backdrop {
-        display: none; /* Hidden by default */
-        position: fixed; /* Stay in place */
-        z-index: 999; /* Sit behind the modal but on top of everything else */
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto; /* Enable scroll if needed (though content scrolls) */
-        background-color: rgba(0,0,0,0.5); /* Black w/ opacity */
-    }
 
-    #search-modal {
-        display: none; /* Hidden by default */
-        position: fixed; /* Stay in place */
-        z-index: 1000; /* Sit on top */
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        justify-content: center; /* Center horizontally */
-        align-items: center; /* Center vertically */
-    }
+/* LSTM Specific Styles */
+#news-result {
+    margin-top: 15px;
+    font-weight: bold;
+}
+.word-container {
+    display: inline-block;
+    margin: 3px;
+    padding: 4px 6px;
+    color: white;
+    border-radius: 4px;
+    font-size: 0.9em;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+.gradient-value {
+    font-size: 0.75em;
+    color: #EEE;
+    margin-left: 4px;
+    opacity: 0.8;
+}
+#news-explanation {
+    font-size: 0.85em;
+    color: #555;
+    margin-top: 10px;
+}
 
-    .modal-content {
-        background-color: #fefefe;
-        margin: auto; /* Auto margins combined with flex centering */
-        padding: 30px;
-        border: 1px solid #888;
-        border-radius: 8px;
-        width: 80%; /* Could be more dynamic */
-        max-width: 800px; /* Max width */
-        max-height: 85vh; /* Max height relative to viewport */
-        overflow-y: hidden; /* Hide direct scroll, inner div will scroll */
-        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-        position: relative; /* For positioning the close button */
-        display: flex; /* Use flexbox for layout inside */
-        flex-direction: column; /* Stack elements vertically */
-    }
+/* Tetris Demo Specific Styles */
+.tetris-gif {
+    width: 100%; /* Make it responsive within the box */
+    max-width: 300px; /* Optional: Prevent it from getting too large */
+    height: auto; /* Maintain aspect ratio */
+    display: block; /* Center it */
+    margin: 15px auto; /* Add vertical space and center horizontally */
+    border: 1px solid #eee; /* Optional light border */
+    border-radius: 4px;
+}
 
-    .modal-close-button {
-        color: #aaa;
-        position: absolute;
-        top: 10px;
-        right: 20px;
-        font-size: 28px;
-        font-weight: bold;
-        cursor: pointer;
-    }
 
-    .modal-close-button:hover,
-    .modal-close-button:focus {
-        color: black;
-        text-decoration: none;
-    }
+/* --- MODAL STYLES --- */
+#modal-backdrop {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.5);
+}
 
-    /* Product Search Results Styles (Inside Modal) */
-    #modal-product-search-results { /* New ID for modal results container */
-        margin-top: 20px;
-        overflow-y: auto; /* Make this part scrollable */
-        flex-grow: 1; /* Allow this container to grow and fill space */
-        border: 1px solid #eee; /* Optional border */
-        padding: 5px; /* Optional padding */
-    }
-    #modal-product-search-results table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 10px;
-    }
-    #modal-product-search-results th,
-    #modal-product-search-results td {
-        border: 1px solid #ddd;
-        padding: 10px;
-        text-align: left;
-        font-size: 0.9em;
-    }
-    #modal-product-search-results th {
-        background-color: #f2f2f2;
-        font-weight: bold;
-        position: sticky; /* Make header sticky within the scrollable area */
-        top: 0; /* Stick to the top */
-        z-index: 1;
-    }
-    #modal-product-search-results td:nth-child(3) { /* Description column (adjust index if needed) */
-       max-width: 350px; /* Limit width of description */
-       word-wrap: break-word; /* Wrap long descriptions */
-    }
-    .loading-message, .error-message {
-        color: #555;
-        font-style: italic;
-        padding: 15px;
-        text-align: center;
-    }
-    .error-message {
-        color: #dc3545; /* Red for errors */
-    }
-    /* --- END MODAL STYLES --- */
+#search-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 30px;
+    border: 1px solid #888;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 800px;
+    max-height: 85vh;
+    overflow-y: hidden;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-close-button {
+    color: #aaa;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.modal-close-button:hover,
+.modal-close-button:focus {
+    color: black;
+    text-decoration: none;
+}
+
+#modal-product-search-results {
+    margin-top: 20px;
+    overflow-y: auto;
+    flex-grow: 1;
+    border: 1px solid #eee;
+    padding: 5px;
+}
+#modal-product-search-results table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+#modal-product-search-results th,
+#modal-product-search-results td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+    font-size: 0.9em;
+}
+#modal-product-search-results th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+#modal-product-search-results td:nth-child(3) {
+   max-width: 350px;
+   word-wrap: break-word;
+}
+.loading-message, .error-message {
+    color: #555;
+    font-style: italic;
+    padding: 15px;
+    text-align: center;
+}
+.error-message {
+    color: #dc3545;
+}
+/* --- END MODAL STYLES --- */
 
 </style>
 </head>
 <body>
-<br>
+
+<br> <!-- Consider using CSS margin/padding instead of <br> -->
+
 <div>
     <h1>About Me</h1>
     <p> Hello, I'm Ansh Mehta. I'm currently pursuing my master's in Computer Science at Northeastern University in Boston.</p>
@@ -222,7 +244,7 @@ redirect_from:
             <button id="product-search-button">Search</button> <!-- Button now triggers modal -->
         </div>
         <!-- Results are now shown in the modal -->
-        <p><small>Note: This demo is running on a CPU. Might be a little slow.</small></p>
+        <p style="margin-top: auto;"><small>Note: This demo is running on a CPU. Might be a little slow.</small></p> <!-- Added margin-top: auto to push to bottom -->
          <!-- <p>Checkout the project in detail on <a href="YOUR_PRODUCT_SEARCH_GITHUB_LINK">Github</a></p> -->
     </div>
 
@@ -235,25 +257,35 @@ redirect_from:
              <!-- Classification and colored words will appear here -->
         </div>
         <p id="news-explanation" style="display: none;">Lighter color means higher importance (gradient magnitude) for the word in classification.</p>
-        <p>Checkout the project in detail on <a href="https://github.com/anshmehtamm/news_category_classifier" target="_blank" rel="noopener noreferrer">Github</a></p>
+        <p style="margin-top: auto;">Checkout the project in detail on <a href="https://github.com/anshmehtamm/news_category_classifier" target="_blank" rel="noopener noreferrer">Github</a></p> <!-- Added margin-top: auto to push to bottom -->
     </div>
 
-</div>
+    <!-- Demo Box 3: Tetris AI (Reinforcement Learning) -->
+    <div class="demo-box">
+        <h3>Tetris AI (Deep Q-Learning)</h3>
+        <p>A Tetris agent trained using Deep Q-Learning (Reinforcement Learning) to learn optimal gameplay strategies. Trained using an OpenAI Gym environment.</p>
+        <p>Checkout a demo below of the trained agent playing:</p>
+        <img src="https://raw.githubusercontent.com/anshmehtamm/tetris-ai/main/demo.gif" alt="Tetris AI playing" class="tetris-gif">
+        <p style="margin-top: auto;">Checkout the project code on <a href="https://github.com/anshmehtamm/tetris-ai" target="_blank" rel="noopener noreferrer">Github</a>.</p> <!-- Added margin-top: auto to push to bottom -->
+    </div>
+
+</div> <!-- End of demos-container -->
+
 
 <!-- The Modal Structure (Initially Hidden) -->
 <div id="modal-backdrop"></div>
 <div id="search-modal">
-  <div class="modal-content">
-    <span class="modal-close-button">×</span>
-    <h2>Semantic Search Results</h2>
-    <p>Showing results for query: <strong id="modal-query-display"></strong></p>
-    <div id="modal-product-search-results">
-        <!-- Search results table will be injected here by JS -->
+    <div class="modal-content">
+        <span class="modal-close-button">×</span>
+        <h2>Semantic Search Results</h2>
+        <p>Showing results for query: <strong id="modal-query-display"></strong></p>
+        <div id="modal-product-search-results">
+            <!-- Search results table will be injected here by JS -->
+        </div>
     </div>
-  </div>
 </div>
 
+<script src="/assets/js/demo.js" defer></script> <!-- Ensure this path is correct -->
 
-<script src="/assets/js/demo.js" defer></script>
 </body>
 </html>
